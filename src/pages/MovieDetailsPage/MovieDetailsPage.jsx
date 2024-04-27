@@ -31,29 +31,29 @@ const MovieDetailsPage = () => {
 
   return (
     <div className={css.container}>
-      <div>
+      <div className={css.imageContainer}>
         {movies.backdrop_path && (
           <img
             src={`https://image.tmdb.org/t/p/w500/${movies.backdrop_path}`}
             alt=""
           />
         )}
-        <div>
-          <h2>{movies.original_title}</h2>
+        <div className={css.descriptionContainer}>
+          <h2 className={css.title}>{movies.original_title}</h2>
           {movies.vote_average && <p>User score: {movies.vote_average}</p>}
           {movies.overview && (
             <div>
-              <h4>Overview</h4>
-              <p>{movies.overview}</p>
+              <h4 className={css.subTitle}>Overview</h4>
+              <p className={css.text}>{movies.overview}</p>
             </div>
           )}
           {movies.genres && (
             <div>
-              <h4>Genres</h4>
+              <h4 className={css.subTitle}>Genres</h4>
               <ul>
                 {movies.genres.map((genre) => (
                   <li key={genre.id}>
-                    <p>{genre.name}</p>
+                    <p className={css.text}>{genre.name}</p>
                   </li>
                 ))}
               </ul>
@@ -61,12 +61,12 @@ const MovieDetailsPage = () => {
           )}
           {movies.production_countries && (
             <div>
-              <h4>Country</h4>
+              <h4 className={css.subTitle}>Country</h4>
 
               <ul>
                 {movies.production_countries.map((country) => (
                   <li key={movies.production_countries.indexOf("country.name")}>
-                    <p>{country.name}</p>
+                    <p className={css.text}>{country.name}</p>
                   </li>
                 ))}
               </ul>
@@ -75,7 +75,7 @@ const MovieDetailsPage = () => {
         </div>
       </div>
 
-      <div>
+      <div className={css.additionalContainer}>
         <h4>Additional information</h4>
         <ul>
           <li>

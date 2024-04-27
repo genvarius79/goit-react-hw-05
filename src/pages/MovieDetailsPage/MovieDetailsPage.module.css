@@ -1,2 +1,32 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.imageContainer {
+  display: flex;
+  gap: 20px;
+}
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.title {
+  font-size: 28px;
+}
+.subTitle {
+  font-size: 20px;
+}
+.text {
+  font-size: 16px;
+  margin-top: 10px;
+}
+.additionalContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid #806c6c;
+  border-top: 1px solid #806c6c;
+  padding: 10px 0 10px 0;
 }

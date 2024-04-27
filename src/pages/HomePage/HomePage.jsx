@@ -27,12 +27,14 @@ const HomePage = () => {
 
   return (
     <div className={css.container}>
-      <h2>Trending today</h2>
+      <h2 className={css.title}>Trending today</h2>
       <ul>
         {movies.map((movie) => {
           return (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
+              <Link className={css.text} to={`/movies/${movie.id}`}>
+                {movie.original_title}
+              </Link>
             </li>
           );
         })}
