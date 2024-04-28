@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+.list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+  text-wrap: wrap;
+  width: calc((100%) / 6);
+}
+.item:hover {
+  box-shadow: 0 0 8px 8px #b8c7db;
+}

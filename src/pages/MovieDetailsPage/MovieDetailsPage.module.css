@@ -30,3 +30,20 @@
   border-top: 1px solid #806c6c;
   padding: 10px 0 10px 0;
 }
+.link {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.link:hover {
+  color: rgb(33, 196, 65);
+}
+.backLink {
+  font-size: 32px;
+}
+.backLink:hover {
+  color: rgb(33, 196, 65);
+}
+.active {
+  color: red;
+}
