@@ -1,9 +1,9 @@
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loader from "../../components/Loader/Loader";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { searchMovie } from "../../movies-api";
 import css from "./MoviesPage.module.css";
+import MovieList from "../../components/MovieList/MovieList";
 const MoviesPage = () => {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
@@ -45,15 +45,7 @@ const MoviesPage = () => {
         <button type="submit">Search</button>
       </form>
       <div>
-        <ul>
-          {filteredValues.map((value) => {
-            return (
-              <li key={value.id}>
-                <Link to={`/movies/${value.id}`}>{value.original_title}</Link>
-              </li>
-            );
-          })}
-        </ul>
+        <MovieList movies={filteredValues}></MovieList>
       </div>
       {error && <ErrorMessage />}
       {loading && <Loader />}

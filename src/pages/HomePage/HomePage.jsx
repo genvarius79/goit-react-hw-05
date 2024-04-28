@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { getTrendMovie } from "../../movies-api";
+import MovieList from "../../components/MovieList/MovieList";
 import css from "./HomePage.module.css";
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -28,17 +28,8 @@ const HomePage = () => {
   return (
     <div className={css.container}>
       <h2 className={css.title}>Trending today</h2>
-      <ul>
-        {movies.map((movie) => {
-          return (
-            <li key={movie.id}>
-              <Link className={css.text} to={`/movies/${movie.id}`}>
-                {movie.original_title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+
+      <MovieList movies={movies}></MovieList>
       {error && <ErrorMessage />}
       {loading && <Loader />}
     </div>
