@@ -1,25 +1,33 @@
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loader from "../../components/Loader/Loader";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import { searchMovie } from "../../movies-api";
 import css from "./MoviesPage.module.css";
 import MovieList from "../../components/MovieList/MovieList";
 const MoviesPage = () => {
-  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    if (query === "") {
-      return;
-    }
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryParam = searchParams.get("query") ?? "";
 
-    async function getSearchMovie() {
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    const form = evt.target;
+    const query = form.query.value.trim();
+    query && setSearchParams({ query: query });
+    form.reset();
+  };
+
+  useEffect(() => {
+    async function getSearchMovie(searchQuery) {
       try {
+        setMovies([]);
         setError(false);
         setLoading(true);
-        const data = await searchMovie(query);
+        const data = await searchMovie(searchQuery);
         setMovies(data);
       } catch (error) {
         setError(true);
@@ -27,21 +35,19 @@ const MoviesPage = () => {
         setLoading(false);
       }
     }
-    getSearchMovie();
-  }, [query]);
+    getSearchMovie(queryParam);
+  }, [queryParam]);
 
-  const filteredValues = movies.filter((movie) =>
-    movie.original_title.toLowerCase().includes(query.toLowerCase())
-  );
+  const filteredValues = useMemo(() => {
+    return movies.filter((movie) =>
+      movie.original_title.toLowerCase().includes(queryParam.toLowerCase())
+    );
+  }, [movies, queryParam]);
 
   return (
     <div className={css.container}>
-      <form onSubmit={(event) => setQuery(event.target.value)}>
-        <input
-          type="text"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="query" placeholder="Search movies" />
         <button type="submit">Search</button>
       </form>
       <div>
